@@ -15,7 +15,7 @@ Until the crates are published on crates.io, depend on a release tag:
 
 ```toml
 [dependencies]
-zolo-plugin = { git = "https://github.com/devzolo/zolo-plugin-sdk.git", tag = "v0.1.0" }
+zolo-plugin = { git = "https://github.com/devzolo/zolo-plugin-sdk.git", tag = "v0.1.1" }
 ```
 
 Cargo records the exact commit behind the tag in `Cargo.lock`.

@@ -309,7 +309,9 @@ pub mod prelude {
     pub use crate::types::*;
     pub use crate::value::PluginValue;
     pub use crate::window_handle::WindowHandle;
-    pub use crate::{PluginContext, RuntimeBridge, ZoloPlugin, caller_source_dir, resolve_plugin_path};
+    pub use crate::{
+        PluginContext, RuntimeBridge, ZoloPlugin, caller_source_dir, resolve_plugin_path,
+    };
     pub use std::sync::Arc;
 }
 

@@ -148,7 +148,9 @@ mod host {
 }
 
 #[cfg(feature = "host")]
-pub use host::{ZoloAllocHost, zolo_rt_alloc, zolo_rt_alloc_zeroed, zolo_rt_dealloc, zolo_rt_realloc};
+pub use host::{
+    ZoloAllocHost, zolo_rt_alloc, zolo_rt_alloc_zeroed, zolo_rt_dealloc, zolo_rt_realloc,
+};
 
 // ─── Plugin half: lazy-resolving shim ────────────────────────────────────────
 
