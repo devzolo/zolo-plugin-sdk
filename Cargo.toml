@@ -1,0 +1,18 @@
+[workspace]
+resolver = "2"
+members = [
+  "crates/zolo-plugin",
+  "crates/zolo-plugin-macros",
+  "crates/zolo-alloc",
+  "crates/zolo-alloc-exports",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+license = "MIT"
+repository = "https://github.com/devzolo/zolo-plugin-sdk"
+
+[workspace.dependencies]
+libloading = "0.9"

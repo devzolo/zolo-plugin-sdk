@@ -1,0 +1,32 @@
+[package]
+name = "zolo-alloc"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "The zolo shared allocator. With the `host` feature it OWNS the single process-wide heap (mimalloc by default) and defines the exported zolo_rt_* C ABI; without it, it is the lazy plugin-side shim that resolves those symbols from the host executable at runtime, so host and plugins free each other's allocations safely."
+
+[features]
+# Host half: compiles the backend and defines + anchors the zolo_rt_* symbols.
+# Enabled by host binaries and by zolo-runtime (staticlib); plugin cdylibs
+# build WITHOUT it (they only need the shim). Backend override features imply
+# `host`. Enable AT MOST one backend-* feature; mimalloc is the implicit
+# default (a not(any(...)) cfg in lib.rs — no feature conflict, no
+# --no-default-features dance).
+host = ["dep:mimalloc"]
+backend-jemalloc = ["host", "dep:tikv-jemallocator"]
+backend-snmalloc = ["host", "dep:snmalloc-rs"]
+backend-system = ["host"]
+
+[dependencies]
+mimalloc = { version = "0.1", default-features = false, optional = true }
+tikv-jemallocator = { version = "0.6", optional = true }
+snmalloc-rs = { version = "0.3", optional = true }
+
+[build-dependencies]
+zolo-alloc-exports = { path = "../zolo-alloc-exports", version = "0.1.0" }
+
+[[test]]
+name = "shim_roundtrip"
+required-features = ["host"]

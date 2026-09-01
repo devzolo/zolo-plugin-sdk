@@ -1,0 +1,10 @@
+[package]
+name = "zolo-alloc-exports"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Build-script helper: emits the per-toolchain linker args that make an executable export the zolo_rt_* shared-allocator symbols, so dynamically-loaded plugins can resolve the process's single heap."
+
+[dependencies]

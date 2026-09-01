@@ -1,0 +1,23 @@
+[package]
+name = "zolo-plugin"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Public Rust SDK for building dynamic and static Zolo plugins"
+
+[dependencies]
+zolo-plugin-macros = { path = "../zolo-plugin-macros", version = "0.1.0" }
+
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+libloading = { workspace = true }
+# Re-exported so `export_plugin!` can install ZoloAlloc as each plugin's global
+# allocator — every plugin then shares the host's one mimalloc heap, making the
+# ownership transfers in the plugin ABI sound. See crates/zolo-alloc.
+zolo-alloc = { path = "../zolo-alloc", version = "0.1.0" }
+# Distributed slice for statically linked plugins (`zolo build --plugins=static`):
+# each plugin built with --cfg zolo_plugin_static registers a StaticPluginDesc
+# here instead of exporting the no_mangle entry points (which would collide
+# across plugins inside one binary).
+linkme = "0.3"
